@@ -1,0 +1,302 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #1c3438;
+  margin: 0;
+  padding: 2rem;
+}
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #5d82a7;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+h1 {
+  margin-top: 0;
+  text-align: center;
+}
+
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1.2fr); /* search / results / favourites */
+  grid-template-areas: "search results favourites";
+  gap: 1.5rem;
+}
+
+.search-panel {
+  grid-area: search;
+}
+
+.results-panel {
+  grid-area: results;
+}
+
+.favourites-panel {
+  grid-area: favourites;
+  background: #f9fafb;
+  padding: 1rem;
+  border-radius: 6px;
+}
+
+/* Panels */
+.search-panel,
+.results-panel {
+  background: #5d82a7;
+  padding: 1rem;
+  border-radius: 6px;
+}
+
+.search-panel h2,
+.results-panel h2 {
+  margin-top: 0;
+}
+
+/* Search form grid */
+.search-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.8rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+label {
+  font-size: 0.85rem;
+  margin-bottom: 0.2rem;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 0.4rem;
+  font-size: 0.9rem;
+}
+
+/* Results grid */
+.property-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding-right: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* Property cards */
+.property-card {
+  display: flex;
+  gap: 1rem;
+
+  width: 100%;
+  box-sizing: border-box;
+
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 0.8rem;
+  background: #3ba756;
+}
+
+.property-image img {
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Text inside card */
+.property-info h3 {
+  margin: 0 0 0.3rem 0;
+}
+
+.property-location {
+  font-size: 0.85rem;
+  color: #555555;
+}
+
+.property-description {
+  font-size: 0.85rem;
+  margin: 0.3rem 0;
+}
+
+/* Link styling */
+.property-link {
+  display: inline-block;
+  margin-top: 0.3rem;
+  font-size: 0.85rem;
+  text-decoration: none;
+  color: #1b6ec2;
+}
+
+.property-link:hover {
+  text-decoration: underline;
+}
+
+
+
+@media (max-width: 900px) {
+  body {
+    padding: 1rem;
+  }
+
+  main {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "search"
+      "results"
+      "favourites";
+    gap: 1rem;
+  }
+
+  /* cards become vertical */
+  .property-card {
+    flex-direction: column;
+  }
+
+  .property-image img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+
+
+.property-page {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* gallery / tabs */
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.property-main-image img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.property-thumbnails {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.thumbnail-btn {
+  border: 2px solid transparent;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.thumbnail-btn img {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.thumbnail-btn.selected {
+  border-color: #1b6ec2;
+}
+
+.property-summary {
+  margin-top: 1rem;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.tab {
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  border: 1px solid #cccccc;
+  background: #f2f2f2;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.tab.active {
+  background: #1b6ec2;
+  color: #ffffff;
+  border-color: #1b6ec2;
+}
+
+.tab-content {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 0.8rem;
+  background: #ffffff;
+}
+
+.floorplan-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* Map iframe */
+.map-wrapper iframe {
+  width: 100%;
+  height: 300px;
+  border: 0;
+}
+
+
+
+@media (max-width: 900px) {
+  .property-page {
+    grid-template-columns: 1fr; /* stack vertically */
+  }
+
+  .property-main-image img {
+    max-height: 260px;
+  }
+
+  .tabs {
+    flex-wrap: wrap;
+  }
+}
+
+.stepper-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.stepper-wrapper input[type="number"] {
+  flex: 1;
+  min-width: 0;
+}
+
+.stepper-button {
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #f2f2f2;
+  cursor: pointer;
+}
+
+.stepper-button:hover {
+  background: #e2e2e2;
+}
