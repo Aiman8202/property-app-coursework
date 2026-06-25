@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Property Details</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="style.css" />
+
+
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'self';
+               img-src 'self' data:;
+               script-src 'self' 'unsafe-inline' https://unpkg.com;
+               style-src 'self' 'unsafe-inline';
+               frame-src https://www.google.com;">
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+</head>
+<body>
+  <main>
+    <a href="index.html">&larr; Back to search</a>
+    <h1>Property Details</h1>
+    <div id="root"></div>
+  </main>
+
+  
+  <script type="text/babel">
+    // Same property data structure, but now with image arrays, floorplan + map
+    const PROPERTY_DATA = {
+      properties: [
+{
+
+id: "prop1",
+  type: "House",
+  bedrooms: 3,
+  price: 750000,
+  tenure: "Freehold",
+  shortDescription:
+    "Attractive three bedroom semi-detached family home close to Petts Wood station.",
+  longDescription:
+    "Attractive three bedroom semi-detached family home situated within 0.5 miles of Petts Wood station...",
+  location: "Petts Wood Road, Petts Wood, Orpington BR5",
+
+  images: [
+    "images/prop1pic1large.jpg",
+    "images/prop1pic2large.jpg",
+    "images/prop1pic3large.jpg",
+    "images/prop1pic4large.jpg",
+    "images/prop1pic5large.jpg",
+    "images/prop1pic6large.jpg"
+  ],
+  floorplan: "images/prop1floorplan.jpg",
+
+  mapEmbed: "https://www.google.com/maps?q=Petts+Wood+Road+BR5&output=embed"
+},
+
+{
+  id: "prop2",
+  type: "Flat",
+  bedrooms: 2,
+  price: 399995,
+  tenure: "Freehold",
+  shortDescription:
+    "Two bedroom, two bathroom garden flat with modern open-plan kitchen and private courtyard.",
+  longDescription:
+    "Two bedroom, two bathroom garden flat with modern open-plan kitchen and private courtyard...",
+  location: "Crofton Road, Orpington BR6",
+
+
+  images: [
+    "images/prop1pic1large.jpg",
+    "images/prop1pic2large.jpg",
+    "images/prop1pic3large.jpg",
+    "images/prop1pic4large.jpg",
+    "images/prop1pic5large.jpg",
+    "images/prop1pic6large.jpg"
+  ],
+  floorplan: "images/prop1floorplan.jpg",
+
+  mapEmbed: "https://www.google.com/maps?q=Crofton+Road+BR6&output=embed"
+},
+
+{
+  id: "prop3",
+  type: "House",
+  bedrooms: 4,
+  price: 925000,
+  tenure: "Freehold",
+  shortDescription:
+    "Spacious four bedroom detached family home with large garden and off-street parking...",
+  longDescription:
+    "Spacious four bedroom detached family home with large garden and off-street parking...",
+  location: "Bromley Road, Shortlands BR2",
+
+
+  images: [
+    "images/prop1pic1large.jpg",
+    "images/prop1pic2large.jpg",
+    "images/prop1pic3large.jpg",
+    "images/prop1pic4large.jpg",
+    "images/prop1pic5large.jpg",
+    "images/prop1pic6large.jpg"
+  ],
+  floorplan: "images/prop1floorplan.jpg",
+
+  mapEmbed: "https://www.google.com/maps?q=Bromley+Road+Shortlands+BR2&output=embed"
+},
+
+{
+  id: "prop4",
+  type: "Flat",
+  bedrooms: 1,
+  price: 275000,
+  tenure: "Leasehold",
+  shortDescription:
+    "Modern one bedroom flat close to local amenities and transport links. Ideal for first-time buyers.",
+  longDescription:
+    "Modern one bedroom flat close to local amenities and transport links. Ideal for first-time buyers.",
+  location: "High Street, Bromley BR1",
+
+
+  images: [
+    "images/prop1pic1large.jpg",
+    "images/prop1pic2large.jpg",
+    "images/prop1pic3large.jpg",
+    "images/prop1pic4large.jpg",
+    "images/prop1pic5large.jpg",
+    "images/prop1pic6large.jpg"
+  ],
+  floorplan: "images/prop1floorplan.jpg",
+
+  mapEmbed: "https://www.google.com/maps?q=High+Street+Bromley+BR1&output=embed"
+},
+
+{
+  id: "prop5",
+  type: "House",
+  bedrooms: 2,
+  price: 450000,
+  tenure: "Freehold",
+  shortDescription:
+    "Charming two bedroom cottage-style house in quiet residential road, with private rear garden....",
+  longDescription:
+    "Charming two bedroom cottage-style house in quiet residential road, with private rear garden....",
+  location: "Station Road, Chislehurst BR7",
+
+
+  images: [
+    "images/prop1pic1large.jpg",
+    "images/prop1pic2large.jpg",
+    "images/prop1pic3large.jpg",
+    "images/prop1pic4large.jpg",
+    "images/prop1pic5large.jpg",
+    "images/prop1pic6large.jpg"
+  ],
+  floorplan: "images/prop1floorplan.jpg",
+
+  mapEmbed: "https://www.google.com/maps?q=Station+Road+Chislehurst+BR7&output=embed"
+},
+
+{
+  id: "prop6",
+  type: "Flat",
+  bedrooms: 3,
+  price: 525000,
+  tenure: "Leasehold",
+  shortDescription:
+    "Three bedroom split-level flat with balcony and allocated parking, close to town centre.",
+  longDescription:
+    "Three bedroom split-level flat with balcony and allocated parking, close to town centre.",
+  location: "Queensway, Petts Wood BR5",
+
+
+  images: [
+    "images/prop1pic1large.jpg",
+    "images/prop1pic2large.jpg",
+    "images/prop1pic3large.jpg",
+    "images/prop1pic4large.jpg",
+    "images/prop1pic5large.jpg",
+    "images/prop1pic6large.jpg"
+  ],
+  floorplan: "images/prop1floorplan.jpg",
+
+  mapEmbed: "https://www.google.com/maps?q=Queensway+Petts+Wood+BR5&output=embed"
+},
+
+{
+  id: "prop7",
+  type: "House",
+  bedrooms: 5,
+  price: 1200000,
+  tenure: "Freehold",
+  shortDescription:
+    "Substantial five bedroom detached house with multiple reception rooms and large driveway.",
+  longDescription:
+    "Substantial five bedroom detached house with multiple reception rooms and large driveway.",
+  location: "Camden Road, Orpington BR5",
+
+
+  images: [
+    "images/prop1pic1large.jpg",
+    "images/prop1pic2large.jpg",
+    "images/prop1pic3large.jpg",
+    "images/prop1pic4large.jpg",
+    "images/prop1pic5large.jpg",
+    "images/prop1pic6large.jpg"
+  ],
+  floorplan: "images/prop1floorplan.jpg",
+
+  mapEmbed: "https://www.google.com/maps?q=Camden+Road+Orpington+BR5&output=embed"
+},
+
+
+]
+    };
+
+    // Helper: get id from ?id=prop1
+    function getPropertyIdFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("id");
+    }
+
+    function Tabs({ activeTab, onChange }) {
+      return (
+        <div className="tabs">
+          <button
+            type="button"
+            className={activeTab === "description" ? "tab active" : "tab"}
+            onClick={() => onChange("description")}
+          >
+            Description
+          </button>
+          <button
+            type="button"
+            className={activeTab === "floorplan" ? "tab active" : "tab"}
+            onClick={() => onChange("floorplan")}
+          >
+            Floor Plan
+          </button>
+          <button
+            type="button"
+            className={activeTab === "map" ? "tab active" : "tab"}
+            onClick={() => onChange("map")}
+          >
+            Map
+          </button>
+        </div>
+      );
+    }
+
+        function PropertyPage() {
+        const idFromUrl = getPropertyIdFromUrl();
+
+
+        const property =
+            PROPERTY_DATA.properties.find(p => p.id === idFromUrl) ||
+            PROPERTY_DATA.properties[0];
+
+        const [activeImageIndex, setActiveImageIndex] = React.useState(0);
+        const [activeTab, setActiveTab] = React.useState("description");
+
+        const mainImage = property.images[activeImageIndex];
+        return (
+        <div className="property-page">
+          <section className="property-main">
+            <div className="property-main-image">
+              <img
+                src={mainImage}
+                alt={property.type + " main image"}
+                onError={e => (e.target.style.display = "none")}
+              />
+            </div>
+
+            <div className="property-thumbnails">
+              {property.images.map((img, index) => (
+                <button
+                  key={img}
+                  type="button"
+                  className={
+                    "thumbnail-btn" +
+                    (index === activeImageIndex ? " selected" : "")
+                  }
+                  onClick={() => setActiveImageIndex(index)}
+                >
+                  <img
+                    src={img}
+                    alt={property.type + " thumbnail " + (index + 1)}
+                    onError={e => (e.target.style.display = "none")}
+                  />
+                </button>
+              ))}
+            </div>
+
+            <div className="property-summary">
+              <h2>
+                £{property.price.toLocaleString()} – {property.bedrooms} bedroom{" "}
+                {property.type}
+              </h2>
+              <p className="property-location">{property.location}</p>
+              <p>{property.shortDescription}</p>
+            </div>
+          </section>
+
+          <section className="property-tabs">
+            <Tabs activeTab={activeTab} onChange={setActiveTab} />
+
+            <div className="tab-content">
+              {activeTab === "description" && (
+                <div>
+                  <h3>Full Description</h3>
+                  <p>{property.longDescription}</p>
+                </div>
+              )}
+
+              {activeTab === "floorplan" && (
+                <div>
+                  <h3>Floor Plan</h3>
+                  <img
+                    src={property.floorplan}
+                    alt="Floor plan"
+                    className="floorplan-image"
+                    onError={e => (e.target.style.display = "none")}
+                  />
+                </div>
+              )}
+
+              {activeTab === "map" && (
+                <div>
+                  <h3>Location Map</h3>
+                  <p>Approximate property location:</p>
+                  <div className="map-wrapper">
+                    <iframe
+                      src={property.mapEmbed}
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Google map"
+                    ></iframe>
+                  </div>
+                </div>
+              )}
+            </div>
+          </section>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<PropertyPage />);
+  </script>
+</body>
+</html>

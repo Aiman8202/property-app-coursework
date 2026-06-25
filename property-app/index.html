@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Property Search</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css">
+
+  <!-- React + Babel from CDN -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+</head>
+<body>
+
+  <main>
+    <h1>Property Search</h1>
+    <div id="root"></div>
+  </main>
+
+
+<script type="text/babel">
+
+// Properties
+  const PROPERTY_DATA = {
+    properties: [
+      {
+        id: "prop1",
+        type: "House",
+        bedrooms: 3,
+        price: 750000,
+        tenure: "Freehold",
+        description:
+          "Attractive three bedroom semi-detached family home situated within 0.5 miles of Petts Wood station...",
+        location: "Petts Wood Road, Petts Wood, Orpington BR5",
+        picture: "images/prop1pic1large.jpg",
+        url: "property.html?id=prop1",
+        added: { year: 2022, month: 10, day: 12 }
+      },
+      {
+        id: "prop2",
+        type: "Flat",
+        bedrooms: 2,
+        price: 399995,
+        tenure: "Freehold",
+        description:
+          "Two bedroom, two bathroom garden flat with modern open-plan kitchen and private courtyard...",
+        location: "Crofton Road, Orpington BR6",
+        picture: "images/prop1pic1large.jpg",
+        url: "property.html?id=prop2",
+        added: { year: 2022, month: 9, day: 14 }
+      },
+      {
+        id: "prop3",
+        type: "House",
+        bedrooms: 4,
+        price: 925000,
+        tenure: "Freehold",
+        description:
+          "Spacious four bedroom detached family home with large garden and off-street parking...",
+        location: "Bromley Road, Shortlands BR2",
+        picture: "images/prop1pic1large.jpg",
+        url: "property.html?id=prop3",
+        added: { year: 2023, month: 2, day: 5 }
+      },
+      {
+        id: "prop4",
+        type: "Flat",
+        bedrooms: 1,
+        price: 275000,
+        tenure: "Leasehold",
+        description:
+          "Modern one bedroom flat close to local amenities and transport links. Ideal for first-time buyers.",
+        location: "High Street, Bromley BR1",
+        picture: "images/prop1pic1large.jpg",
+        url: "property.html?id=prop4",
+        added: { year: 2023, month: 6, day: 20 }
+      },
+      {
+        id: "prop5",
+        type: "House",
+        bedrooms: 2,
+        price: 450000,
+        tenure: "Freehold",
+        description:
+          "Charming two bedroom cottage-style house in quiet residential road, with private rear garden.",
+        location: "Station Road, Chislehurst BR7",
+        picture: "images/prop1pic1large.jpg",
+        url: "property.html?id=prop5",
+        added: { year: 2024, month: 1, day: 10 }
+      },
+      {
+        id: "prop6",
+        type: "Flat",
+        bedrooms: 3,
+        price: 525000,
+        tenure: "Leasehold",
+        description:
+          "Three bedroom split-level flat with balcony and allocated parking, close to town centre.",
+        location: "Queensway, Petts Wood BR5",
+        picture: "images/prop1pic1large.jpg",
+        url: "property.html?id=prop6",
+        added: { year: 2024, month: 4, day: 3 }
+      },
+      {
+        id: "prop7",
+        type: "House",
+        bedrooms: 5,
+        price: 1200000,
+        tenure: "Freehold",
+        description:
+          "Substantial five bedroom detached house with multiple reception rooms and large driveway.",
+        location: "Camden Road, Orpington BR5",
+        picture: "images/prop1pic1large.jpg",
+        url: "property.html?id=prop7",
+        added: { year: 2024, month: 9, day: 1 }
+      }
+    ]
+  };
+
+  // Search logic
+  function matchesSearch(property, criteria) {
+    if (criteria.type !== "any" && property.type !== criteria.type) return false;
+
+    if (criteria.minPrice && property.price < Number(criteria.minPrice)) return false;
+    if (criteria.maxPrice && property.price > Number(criteria.maxPrice)) return false;
+
+    if (criteria.minBedrooms && property.bedrooms < Number(criteria.minBedrooms)) return false;
+    if (criteria.maxBedrooms && property.bedrooms > Number(criteria.maxBedrooms)) return false;
+
+    if (
+      criteria.postcode &&
+      !property.location.toUpperCase().includes(criteria.postcode.toUpperCase())
+    ) {
+      return false;
+    }
+
+    if (criteria.dateFrom || criteria.dateTo) {
+      const addedDate = new Date(
+        property.added.year,
+        property.added.month - 1,
+        property.added.day
+      );
+      if (criteria.dateFrom && addedDate < new Date(criteria.dateFrom)) return false;
+      if (criteria.dateTo && addedDate > new Date(criteria.dateTo)) return false;
+    }
+
+    return true;
+  }
+
+  // Widget components
+
+  function SelectField({ id, label, name, value, onChange, children }) {
+    return (
+      <div className="form-group">
+        <label htmlFor={id}>{label}</label>
+        <select id={id} name={name} value={value} onChange={onChange}>
+          {children}
+        </select>
+      </div>
+    );
+  }
+
+  function TextInputField({ id, label, name, value, onChange, placeholder }) {
+    const handleChange = (e) => {
+      // auto-uppercase postcode
+      const newValue = name === "postcode" ? e.target.value.toUpperCase() : e.target.value;
+      onChange({ target: { name, value: newValue } });
+    };
+
+    return (
+      <div className="form-group">
+        <label htmlFor={id}>{label}</label>
+        <input
+          id={id}
+          name={name}
+          type="text"
+          value={value}
+          placeholder={placeholder}
+          onChange={handleChange}
+        />
+      </div>
+    );
+  }
+
+  function NumberInputWithStepper({
+    id,
+    label,
+    name,
+    value,
+    onChange,
+    min,
+    max,
+    step = 1,
+    placeholder
+  }) {
+    const numericValue = value === "" ? "" : Number(value);
+
+    const handleChange = (e) => {
+      onChange(e);
+    };
+
+    const adjust = (delta) => {
+      let current = value === "" ? 0 : Number(value);
+      if (Number.isNaN(current)) current = 0;
+      let next = current + delta;
+      if (min !== undefined && next < min) next = min;
+      if (max !== undefined && next > max) next = max;
+      onChange({ target: { name, value: String(next) } });
+    };
+
+    return (
+      <div className="form-group">
+        <label htmlFor={id}>{label}</label>
+        <div className="stepper-wrapper">
+          <button
+            type="button"
+            className="stepper-button"
+            onClick={() => adjust(-step)}
+            aria-label={"Decrease " + label}
+          >
+            -
+          </button>
+          <input
+            id={id}
+            name={name}
+            type="number"
+            value={numericValue}
+            placeholder={placeholder}
+            onChange={handleChange}
+            min={min}
+            max={max}
+          />
+          <button
+            type="button"
+            className="stepper-button"
+            onClick={() => adjust(step)}
+            aria-label={"Increase " + label}
+          >
+            +
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  function DateInputField({ id, label, name, value, onChange }) {
+    return (
+      <div className="form-group">
+        <label htmlFor={id}>{label}</label>
+        <input
+          id={id}
+          name={name}
+          type="date"
+          value={value}
+          onChange={onChange}
+        />
+      </div>
+    );
+  }
+
+  // Property card results
+  
+  function PropertyCard({
+    property,
+    isFavourite,
+    onAddFavourite,
+    onRemoveFavourite,
+    onDragStartFrom
+  }) {
+    return (
+      <article
+        className="property-card"
+        draggable
+        onDragStart={() => onDragStartFrom(property.id, "results")}
+      >
+        <div className="property-image">
+          <img
+            src={property.picture}
+            alt={property.type + " in " + property.location}
+            onError={(e) => (e.target.style.display = "none")}
+          />
+        </div>
+        <div className="property-info">
+          <h3>£{property.price.toLocaleString()}</h3>
+          <p>
+            {property.bedrooms} bedroom {property.type}
+          </p>
+          <p className="property-location">{property.location}</p>
+          <p className="property-description">
+            {property.description.substring(0, 100)}...
+          </p>
+          <div className="property-actions">
+            <a href={property.url} className="property-link">
+              View property
+            </a>
+            {isFavourite ? (
+              <button
+                type="button"
+                className="fav-button remove"
+                onClick={() => onRemoveFavourite(property.id)}
+              >
+                ★ Remove favourite
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="fav-button"
+                onClick={() => onAddFavourite(property.id)}
+              >
+                ☆ Add to favourites
+              </button>
+            )}
+          </div>
+        </div>
+      </article>
+    );
+  }
+
+  // Favourites list
+  function FavouritesList({
+    properties,
+    onRemoveFavourite,
+    onClear,
+    onDragStartFrom
+  }) {
+    return (
+      <div className="favourites-inner">
+        <div className="favourites-header">
+          <h2>Favourites ({properties.length})</h2>
+          {properties.length > 0 && (
+            <button type="button" className="clear-button" onClick={onClear}>
+              Clear all
+            </button>
+          )}
+        </div>
+
+        {properties.length === 0 && (
+          <p className="favourites-empty">
+            Drag properties here or click “Add to favourites”.
+          </p>
+        )}
+
+        <div className="favourites-list">
+          {properties.map((p) => (
+            <article
+              key={p.id}
+              className="property-card favourite-card"
+              draggable
+              onDragStart={() => onDragStartFrom(p.id, "favourites")}
+            >
+              <div className="property-image">
+                <img
+                  src={p.picture}
+                  alt={p.type + " favourite"}
+                  onError={(e) => (e.target.style.display = "none")}
+                />
+              </div>
+              <div className="property-info">
+                <h3>£{p.price.toLocaleString()}</h3>
+                <p>
+                  {p.bedrooms} bed {p.type}
+                </p>
+                <p className="property-location small">{p.location}</p>
+                <div className="property-actions">
+                  <a href={p.url} className="property-link">
+                    View
+                  </a>
+                  <button
+                    type="button"
+                    className="fav-button remove"
+                    onClick={() => onRemoveFavourite(p.id)}
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  // Main app
+  function App() {
+    const [properties] = React.useState(PROPERTY_DATA.properties);
+    const [criteria, setCriteria] = React.useState({
+      type: "any",
+      minPrice: "",
+      maxPrice: "",
+      minBedrooms: "",
+      maxBedrooms: "",
+      dateFrom: "",
+      dateTo: "",
+      postcode: ""
+    });
+
+    const [favourites, setFavourites] = React.useState([]); // ids
+    const [dragData, setDragData] = React.useState(null);
+
+    const filtered = properties.filter((p) => matchesSearch(p, criteria));
+
+    const favouriteProperties = favourites
+      .map((id) => properties.find((p) => p.id === id))
+      .filter(Boolean);
+
+    function handleChange(e) {
+      const { name, value } = e.target;
+      setCriteria((prev) => ({ ...prev, [name]: value }));
+    }
+
+    function addFavourite(id) {
+      setFavourites((prev) => (prev.includes(id) ? prev : [...prev, id]));
+    }
+
+    function removeFavourite(id) {
+      setFavourites((prev) => prev.filter((fid) => fid !== id));
+    }
+
+    function clearFavourites() {
+      setFavourites([]);
+    }
+
+    function handleDragStart(id, source) {
+      setDragData({ id, source });
+    }
+
+    function handleDropOnFavourites(e) {
+      e.preventDefault();
+      if (dragData && dragData.source === "results") {
+        addFavourite(dragData.id);
+      }
+      setDragData(null);
+    }
+
+    function handleDropOnResults(e) {
+      e.preventDefault();
+      if (dragData && dragData.source === "favourites") {
+        removeFavourite(dragData.id);
+      }
+      setDragData(null);
+    }
+
+    function handleDragOver(e) {
+      e.preventDefault();
+    }
+
+    return (
+      <div className="layout">
+        {/* SEARCH PANEL */}
+        <section className="search-panel">
+          <h2>Search Filters</h2>
+          <form className="search-form" onSubmit={(e) => e.preventDefault()}>
+            <SelectField
+              id="type"
+              label="Property Type"
+              name="type"
+              value={criteria.type}
+              onChange={handleChange}
+            >
+              <option value="any">Any</option>
+              <option value="House">House</option>
+              <option value="Flat">Flat</option>
+            </SelectField>
+
+            <TextInputField
+              id="postcode"
+              label="Postcode Area"
+              name="postcode"
+              value={criteria.postcode}
+              onChange={handleChange}
+              placeholder="e.g. BR1, BR5"
+            />
+
+            <NumberInputWithStepper
+              id="minPrice"
+              label="Min Price (£)"
+              name="minPrice"
+              value={criteria.minPrice}
+              onChange={handleChange}
+              min={0}
+              step={25000}
+            />
+
+            <NumberInputWithStepper
+              id="maxPrice"
+              label="Max Price (£)"
+              name="maxPrice"
+              value={criteria.maxPrice}
+              onChange={handleChange}
+              min={0}
+              step={25000}
+            />
+
+            <NumberInputWithStepper
+              id="minBedrooms"
+              label="Min Bedrooms"
+              name="minBedrooms"
+              value={criteria.minBedrooms}
+              onChange={handleChange}
+              min={0}
+              step={1}
+            />
+
+            <NumberInputWithStepper
+              id="maxBedrooms"
+              label="Max Bedrooms"
+              name="maxBedrooms"
+              value={criteria.maxBedrooms}
+              onChange={handleChange}
+              min={0}
+              step={1}
+            />
+
+            <DateInputField
+              id="dateFrom"
+              label="Date Added From"
+              name="dateFrom"
+              value={criteria.dateFrom}
+              onChange={handleChange}
+            />
+
+            <DateInputField
+              id="dateTo"
+              label="Date Added To"
+              name="dateTo"
+              value={criteria.dateTo}
+              onChange={handleChange}
+            />
+          </form>
+        </section>
+
+        {/* RESULTS PANEL */}
+        <section
+          className="results-panel"
+          onDragOver={handleDragOver}
+          onDrop={handleDropOnResults}
+        >
+          <h2>
+            Results ({filtered.length} of {properties.length})
+          </h2>
+
+          {filtered.length === 0 && (
+            <p>No properties match your search criteria.</p>
+          )}
+
+          <div className="property-grid">
+            {filtered.map((p) => (
+              <PropertyCard
+                key={p.id}
+                property={p}
+                isFavourite={favourites.includes(p.id)}
+                onAddFavourite={addFavourite}
+                onRemoveFavourite={removeFavourite}
+                onDragStartFrom={handleDragStart}
+              />
+            ))}
+          </div>
+          <p className="drag-hint">
+            Tip: drag a favourite card back into this results area to remove it.
+          </p>
+        </section>
+
+        {/* FAVOURITES PANEL */}
+        <section
+          className="favourites-panel"
+          onDragOver={handleDragOver}
+          onDrop={handleDropOnFavourites}
+        >
+          <FavouritesList
+            properties={favouriteProperties}
+            onRemoveFavourite={removeFavourite}
+            onClear={clearFavourites}
+            onDragStartFrom={handleDragStart}
+          />
+        </section>
+      </div>
+    );
+  }
+
+  const root = ReactDOM.createRoot(document.getElementById("root"));
+  root.render(<App />);
+
+  </script>
+</body>
+</html>
