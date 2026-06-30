@@ -28,194 +28,9 @@
 
   
   <script type="text/babel">
-    // Same property data structure, but now with image arrays, floorplan + map
-    const PROPERTY_DATA = {
-      properties: [
-{
-
-id: "prop1",
-  type: "House",
-  bedrooms: 3,
-  price: 750000,
-  tenure: "Freehold",
-  shortDescription:
-    "Attractive three bedroom semi-detached family home close to Petts Wood station.",
-  longDescription:
-    "Attractive three bedroom semi-detached family home situated within 0.5 miles of Petts Wood station...",
-  location: "Petts Wood Road, Petts Wood, Orpington BR5",
-
-  images: [
-    "images/prop1pic1large.jpg",
-    "images/prop1pic2large.jpg",
-    "images/prop1pic3large.jpg",
-    "images/prop1pic4large.jpg",
-    "images/prop1pic5large.jpg",
-    "images/prop1pic6large.jpg"
-  ],
-  floorplan: "images/prop1floorplan.jpg",
-
-  mapEmbed: "https://www.google.com/maps?q=Petts+Wood+Road+BR5&output=embed"
-},
-
-{
-  id: "prop2",
-  type: "Flat",
-  bedrooms: 2,
-  price: 399995,
-  tenure: "Freehold",
-  shortDescription:
-    "Two bedroom, two bathroom garden flat with modern open-plan kitchen and private courtyard.",
-  longDescription:
-    "Two bedroom, two bathroom garden flat with modern open-plan kitchen and private courtyard...",
-  location: "Crofton Road, Orpington BR6",
-
-
-  images: [
-    "images/prop1pic1large.jpg",
-    "images/prop1pic2large.jpg",
-    "images/prop1pic3large.jpg",
-    "images/prop1pic4large.jpg",
-    "images/prop1pic5large.jpg",
-    "images/prop1pic6large.jpg"
-  ],
-  floorplan: "images/prop1floorplan.jpg",
-
-  mapEmbed: "https://www.google.com/maps?q=Crofton+Road+BR6&output=embed"
-},
-
-{
-  id: "prop3",
-  type: "House",
-  bedrooms: 4,
-  price: 925000,
-  tenure: "Freehold",
-  shortDescription:
-    "Spacious four bedroom detached family home with large garden and off-street parking...",
-  longDescription:
-    "Spacious four bedroom detached family home with large garden and off-street parking...",
-  location: "Bromley Road, Shortlands BR2",
-
-
-  images: [
-    "images/prop1pic1large.jpg",
-    "images/prop1pic2large.jpg",
-    "images/prop1pic3large.jpg",
-    "images/prop1pic4large.jpg",
-    "images/prop1pic5large.jpg",
-    "images/prop1pic6large.jpg"
-  ],
-  floorplan: "images/prop1floorplan.jpg",
-
-  mapEmbed: "https://www.google.com/maps?q=Bromley+Road+Shortlands+BR2&output=embed"
-},
-
-{
-  id: "prop4",
-  type: "Flat",
-  bedrooms: 1,
-  price: 275000,
-  tenure: "Leasehold",
-  shortDescription:
-    "Modern one bedroom flat close to local amenities and transport links. Ideal for first-time buyers.",
-  longDescription:
-    "Modern one bedroom flat close to local amenities and transport links. Ideal for first-time buyers.",
-  location: "High Street, Bromley BR1",
-
-
-  images: [
-    "images/prop1pic1large.jpg",
-    "images/prop1pic2large.jpg",
-    "images/prop1pic3large.jpg",
-    "images/prop1pic4large.jpg",
-    "images/prop1pic5large.jpg",
-    "images/prop1pic6large.jpg"
-  ],
-  floorplan: "images/prop1floorplan.jpg",
-
-  mapEmbed: "https://www.google.com/maps?q=High+Street+Bromley+BR1&output=embed"
-},
-
-{
-  id: "prop5",
-  type: "House",
-  bedrooms: 2,
-  price: 450000,
-  tenure: "Freehold",
-  shortDescription:
-    "Charming two bedroom cottage-style house in quiet residential road, with private rear garden....",
-  longDescription:
-    "Charming two bedroom cottage-style house in quiet residential road, with private rear garden....",
-  location: "Station Road, Chislehurst BR7",
-
-
-  images: [
-    "images/prop1pic1large.jpg",
-    "images/prop1pic2large.jpg",
-    "images/prop1pic3large.jpg",
-    "images/prop1pic4large.jpg",
-    "images/prop1pic5large.jpg",
-    "images/prop1pic6large.jpg"
-  ],
-  floorplan: "images/prop1floorplan.jpg",
-
-  mapEmbed: "https://www.google.com/maps?q=Station+Road+Chislehurst+BR7&output=embed"
-},
-
-{
-  id: "prop6",
-  type: "Flat",
-  bedrooms: 3,
-  price: 525000,
-  tenure: "Leasehold",
-  shortDescription:
-    "Three bedroom split-level flat with balcony and allocated parking, close to town centre.",
-  longDescription:
-    "Three bedroom split-level flat with balcony and allocated parking, close to town centre.",
-  location: "Queensway, Petts Wood BR5",
-
-
-  images: [
-    "images/prop1pic1large.jpg",
-    "images/prop1pic2large.jpg",
-    "images/prop1pic3large.jpg",
-    "images/prop1pic4large.jpg",
-    "images/prop1pic5large.jpg",
-    "images/prop1pic6large.jpg"
-  ],
-  floorplan: "images/prop1floorplan.jpg",
-
-  mapEmbed: "https://www.google.com/maps?q=Queensway+Petts+Wood+BR5&output=embed"
-},
-
-{
-  id: "prop7",
-  type: "House",
-  bedrooms: 5,
-  price: 1200000,
-  tenure: "Freehold",
-  shortDescription:
-    "Substantial five bedroom detached house with multiple reception rooms and large driveway.",
-  longDescription:
-    "Substantial five bedroom detached house with multiple reception rooms and large driveway.",
-  location: "Camden Road, Orpington BR5",
-
-
-  images: [
-    "images/prop1pic1large.jpg",
-    "images/prop1pic2large.jpg",
-    "images/prop1pic3large.jpg",
-    "images/prop1pic4large.jpg",
-    "images/prop1pic5large.jpg",
-    "images/prop1pic6large.jpg"
-  ],
-  floorplan: "images/prop1floorplan.jpg",
-
-  mapEmbed: "https://www.google.com/maps?q=Camden+Road+Orpington+BR5&output=embed"
-},
-
-
-]
-    };
+    // Properties are now loaded from data/properties.json via fetch(),
+    // instead of being hardcoded here. See PropertyPage below for the
+    // useState/useEffect logic that loads them and finds the matching one.
 
     // Helper: get id from ?id=prop1
     function getPropertyIdFromUrl() {
@@ -254,13 +69,54 @@ id: "prop1",
         function PropertyPage() {
         const idFromUrl = getPropertyIdFromUrl();
 
+        // All properties are fetched once on mount; we then find() the one
+        // matching the ?id= in the URL. This mirrors index.html's pattern
+        // so both pages share the same data source and loading approach.
+        const [properties, setProperties] = React.useState([]);
+        const [loading, setLoading] = React.useState(true);
+        const [loadError, setLoadError] = React.useState(null);
 
-        const property =
-            PROPERTY_DATA.properties.find(p => p.id === idFromUrl) ||
-            PROPERTY_DATA.properties[0];
+        React.useEffect(() => {
+          fetch("data/properties.json")
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Network response was not OK (" + response.status + ")");
+              }
+              return response.json();
+            })
+            .then((data) => {
+              setProperties(data.properties);
+              setLoading(false);
+            })
+            .catch((error) => {
+              console.error("Failed to load properties.json:", error);
+              setLoadError(error.message);
+              setLoading(false);
+            });
+        }, []);
 
         const [activeImageIndex, setActiveImageIndex] = React.useState(0);
         const [activeTab, setActiveTab] = React.useState("description");
+
+        if (loading) {
+          return <p className="loading-message">Loading property…</p>;
+        }
+
+        if (loadError) {
+          return (
+            <p className="loading-message error">
+              Sorry, something went wrong loading the property data: {loadError}
+            </p>
+          );
+        }
+
+        const property =
+            properties.find(p => p.id === idFromUrl) ||
+            properties[0];
+
+        if (!property) {
+          return <p className="loading-message error">No properties found.</p>;
+        }
 
         const mainImage = property.images[activeImageIndex];
         return (

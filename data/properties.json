@@ -1,35 +1,159 @@
 {
-	"properties": [
-        {
-            "id":"prop1",
-			"type":"House",
-            "bedrooms":3,
-			"price":750000,
-			"tenure":"Freehold",
-			"description":"Attractive three bedroom semi-detached family home situated within 0.5 miles of Petts Wood station with fast trains to London and within easy walking distance of local shops, schools, bus routes and National Trust woodland. The property comprises; two receptions, fitted 18'9 x 10'1 kitchen/breakfast room and conservatory. The property also benefits from having a utility room and cloakroom. To the first floor there are three bedrooms and a family bathroom with separate WC. Additional features include double glazing, gas central heating and a well presented interior...",
-			"location":"Petts Wood Road, Petts Wood, Orpington BR5",
-			"picture":"images/prop1pic1small.jpg",
-			"url":"properties/prop1.html",
-            "added": {
-                "month":"October",
-                "day":12,
-                "year":2022
-            }
-        },
-		{
-            "id":"prop2",
-			"type":"Flat",
-            "bedrooms":2,
-			"price":399995,
-			"tenure":"Freehold",
-			"description":"Presented in excellent decorative order throughout is this two double bedroom, two bathroom, garden flat. <br>The modern fitted kitchen is open plan to the living room which boasts solid wooden floors and includes integrated appliances including a dishwasher & a washing machine. This large open plan benefits from bi folding doors onto a secluded private courtyard garden. Both bedrooms are double sized, and the family bathroom boasts a matching three piece suite a shower attachment over the bath. There is also a separate wet room. There are walnut doors throughout and wiring for Sky TV/aerial points in the living room/kitchen and both bedrooms.<br>This apartment being only five years old, is still under a 10 year building guarantee...",
-			"location":"Crofton Road Orpington BR6",
-			"picture":"images/prop2pic1small.jpg",
-			"url":"properties/prop2.html",
-            "added": {
-                "month":"September",
-                "day":14,
-                "year":2022
-            }
-        }
-]}
+  "properties": [
+    {
+      "id": "prop1",
+      "type": "House",
+      "bedrooms": 3,
+      "price": 750000,
+      "tenure": "Freehold",
+      "shortDescription": "Attractive three bedroom semi-detached family home close to Petts Wood station.",
+      "longDescription": "Attractive three bedroom semi-detached family home situated within 0.5 miles of Petts Wood station with fast trains to London and within easy walking distance of local shops, schools, bus routes and National Trust woodland. The property comprises; two receptions, fitted kitchen/breakfast room and conservatory. The property also benefits from having a utility room and cloakroom. To the first floor there are three bedrooms and a family bathroom with separate WC. Additional features include double glazing, gas central heating and a well presented interior.",
+      "location": "Petts Wood Road, Petts Wood, Orpington BR5",
+      "images": [
+        "images/prop1pic1large.jpg",
+        "images/prop1pic2large.jpg",
+        "images/prop1pic3large.jpg",
+        "images/prop1pic4large.jpg",
+        "images/prop1pic5large.jpg",
+        "images/prop1pic6large.jpg"
+      ],
+      "floorplan": "images/prop1floorplan.jpg",
+      "mapEmbed": "https://www.google.com/maps?q=Petts+Wood+Road+BR5&output=embed",
+      "url": "property.html?id=prop1",
+      "added": "2022-10-12"
+    },
+    {
+      "id": "prop2",
+      "type": "Flat",
+      "bedrooms": 2,
+      "price": 399995,
+      "tenure": "Freehold",
+      "shortDescription": "Two bedroom, two bathroom garden flat with modern open-plan kitchen and private courtyard.",
+      "longDescription": "Presented in excellent decorative order throughout is this two double bedroom, two bathroom, garden flat. The modern fitted kitchen is open plan to the living room which boasts solid wooden floors and includes integrated appliances including a dishwasher and a washing machine. This large open plan space benefits from bi-folding doors onto a secluded private courtyard garden. Both bedrooms are double sized, and the family bathroom boasts a matching three piece suite with a shower attachment over the bath. There is also a separate wet room, walnut doors throughout, and wiring for TV and broadband in the living room and both bedrooms.",
+      "location": "Crofton Road, Orpington BR6",
+      "images": [
+        "images/prop2pic1large.jpg",
+        "images/prop2pic2large.jpg",
+        "images/prop2pic3large.jpg",
+        "images/prop2pic4large.jpg",
+        "images/prop2pic5large.jpg",
+        "images/prop2pic6large.jpg"
+      ],
+      "floorplan": "images/prop2floorplan.jpg",
+      "mapEmbed": "https://www.google.com/maps?q=Crofton+Road+BR6&output=embed",
+      "url": "property.html?id=prop2",
+      "added": "2022-09-14"
+    },
+    {
+      "id": "prop3",
+      "type": "House",
+      "bedrooms": 4,
+      "price": 925000,
+      "tenure": "Freehold",
+      "shortDescription": "Spacious four bedroom detached family home with large garden and off-street parking.",
+      "longDescription": "A spacious and beautifully presented four bedroom detached family home, set back from the road behind a generous driveway offering ample off-street parking. The ground floor features a welcoming entrance hall, separate living and dining rooms, and a large kitchen/breakfast room with French doors leading directly onto an expansive rear garden — ideal for both family life and entertaining. Upstairs, four good-sized bedrooms are complemented by a family bathroom and en-suite to the principal bedroom. Located within easy reach of Shortlands station and well-regarded local schools, this home offers space, flexibility, and a quiet residential setting.",
+      "location": "Bromley Road, Shortlands BR2",
+      "images": [
+        "images/prop3pic1large.jpg",
+        "images/prop3pic2large.jpg",
+        "images/prop3pic3large.jpg",
+        "images/prop3pic4large.jpg",
+        "images/prop3pic5large.jpg",
+        "images/prop3pic6large.jpg"
+      ],
+      "floorplan": "images/prop3floorplan.jpg",
+      "mapEmbed": "https://www.google.com/maps?q=Bromley+Road+Shortlands+BR2&output=embed",
+      "url": "property.html?id=prop3",
+      "added": "2022-03-14"
+    },
+    {
+      "id": "prop4",
+      "type": "Flat",
+      "bedrooms": 1,
+      "price": 275000,
+      "tenure": "Leasehold",
+      "shortDescription": "Modern one bedroom flat close to local amenities and transport links. Ideal for first-time buyers.",
+      "longDescription": "A bright and modern one bedroom flat, ideally positioned within walking distance of Bromley's High Street, offering excellent access to shops, restaurants, and transport links including Bromley South station. The open-plan living and kitchen area is finished to a high standard with integrated appliances, while the well-proportioned double bedroom and contemporary bathroom complete the accommodation. Compact and efficiently laid out, this flat represents an excellent opportunity for first-time buyers or investors seeking a low-maintenance property in a sought-after, well-connected location.",
+      "location": "High Street, Bromley BR1",
+      "images": [
+        "images/prop4pic1large.jpg",
+        "images/prop4pic2large.jpg",
+        "images/prop4pic3large.jpg",
+        "images/prop4pic4large.jpg",
+        "images/prop4pic5large.jpg",
+        "images/prop4pic6large.jpg"
+      ],
+      "floorplan": "images/prop4floorplan.jpg",
+      "mapEmbed": "https://www.google.com/maps?q=High+Street+Bromley+BR1&output=embed",
+      "url": "property.html?id=prop4",
+      "added": "2024-06-02"
+    },
+    {
+      "id": "prop5",
+      "type": "House",
+      "bedrooms": 2,
+      "price": 450000,
+      "tenure": "Freehold",
+      "shortDescription": "Charming two bedroom cottage-style house in quiet residential road, with private rear garden.",
+      "longDescription": "A charming two bedroom cottage-style house tucked away on a quiet residential road in the heart of Chislehurst. Full of character, the property features a cosy living room with period-style fireplace, a separate dining area, and a fitted kitchen to the rear. Both bedrooms are well-proportioned, served by a tastefully updated family bathroom. Outside, a private rear garden offers a peaceful outdoor space rarely found so close to the village centre. Within easy walking distance of Chislehurst station, the historic Common, and an excellent selection of local shops and eateries, this home combines village charm with convenient commuting links.",
+      "location": "Station Road, Chislehurst BR7",
+      "images": [
+        "images/prop5pic1large.jpg",
+        "images/prop5pic2large.jpg",
+        "images/prop5pic3large.jpg",
+        "images/prop5pic4large.jpg",
+        "images/prop5pic5large.jpg",
+        "images/prop5pic6large.jpg"
+      ],
+      "floorplan": "images/prop5floorplan.jpg",
+      "mapEmbed": "https://www.google.com/maps?q=Station+Road+Chislehurst+BR7&output=embed",
+      "url": "property.html?id=prop5",
+      "added": "2023-11-20"
+    },
+    {
+      "id": "prop6",
+      "type": "Flat",
+      "bedrooms": 3,
+      "price": 525000,
+      "tenure": "Leasehold",
+      "shortDescription": "Three bedroom split-level flat with balcony and allocated parking, close to town centre.",
+      "longDescription": "A well-presented three bedroom split-level flat offering generous accommodation across two floors, close to Petts Wood town centre. The lower level comprises an open-plan living and dining space with access to a private balcony, along with a modern fitted kitchen. Upstairs, three comfortable bedrooms share a contemporary family bathroom. The property further benefits from allocated off-street parking — a valuable addition in this popular and convenient location, just a short walk from Petts Wood station, shops, and local amenities.",
+      "location": "Queensway, Petts Wood BR5",
+      "images": [
+        "images/prop6pic1large.jpg",
+        "images/prop6pic2large.jpg",
+        "images/prop6pic3large.jpg",
+        "images/prop6pic4large.jpg",
+        "images/prop6pic5large.jpg",
+        "images/prop6pic6large.jpg"
+      ],
+      "floorplan": "images/prop6floorplan.jpg",
+      "mapEmbed": "https://www.google.com/maps?q=Queensway+Petts+Wood+BR5&output=embed",
+      "url": "property.html?id=prop6",
+      "added": "2025-01-08"
+    },
+    {
+      "id": "prop7",
+      "type": "House",
+      "bedrooms": 5,
+      "price": 1200000,
+      "tenure": "Freehold",
+      "shortDescription": "Substantial five bedroom detached house with multiple reception rooms and large driveway.",
+      "longDescription": "An impressive and substantial five bedroom detached family home, offering extensive and versatile living accommodation throughout. The ground floor features multiple reception rooms including a formal living room, separate dining room, and a large family/garden room, alongside a well-equipped kitchen/breakfast room. A large driveway provides parking for several vehicles, leading to a generous rear garden ideal for family use. Upstairs, five spacious bedrooms are served by both a family bathroom and an en-suite to the principal bedroom. Positioned in a desirable Orpington location, this home is well suited to larger families seeking space, flexibility, and a sense of occasion.",
+      "location": "Camden Road, Orpington BR5",
+      "images": [
+        "images/prop7pic1large.jpg",
+        "images/prop7pic2large.jpg",
+        "images/prop7pic3large.jpg",
+        "images/prop7pic4large.jpg",
+        "images/prop7pic5large.jpg",
+        "images/prop7pic6large.jpg",
+        "images/prop7pic7large.jpg"
+      ],
+      "floorplan": "images/prop7floorplan.jpg",
+      "mapEmbed": "https://www.google.com/maps?q=Camden+Road+Orpington+BR5&output=embed",
+      "url": "property.html?id=prop7",
+      "added": "2021-04-29"
+    }
+  ]
+}
